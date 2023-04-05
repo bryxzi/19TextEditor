@@ -18,12 +18,12 @@ module.exports = () => {
     plugins: [
       new HtmlWebpackPlugin({
         title: 'JATE',  
-        template: './src/index.html', 
+        template: './index.html', 
       }),
       new MiniCssExtractPlugin(),
       new InjectManifest({
-        swSrc: './src/src-sw.js', 
-        swDest: 'sw.js', 
+        swSrc: './src-sw.js', 
+        swDest: 'src-sw.js', 
       }),
       new WebpackPwaManifest({
         name: 'jate', 
