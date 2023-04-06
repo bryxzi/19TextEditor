@@ -1,7 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { InjectManifest } = require('workbox-webpack-plugin');
 
 module.exports = () => {
@@ -20,13 +19,14 @@ module.exports = () => {
         title: 'JATE',  
         template: './index.html', 
       }),
-      new MiniCssExtractPlugin(),
       new InjectManifest({
         swSrc: './src-sw.js', 
         swDest: 'src-sw.js', 
       }),
       new WebpackPwaManifest({
         name: 'jate', 
+        fingerprints: false,
+        inject: true,
         short_name: 'jate', 
         description: 'Text editor that can be installed from the web browser', 
         background_color: '#01579b',
@@ -46,20 +46,17 @@ module.exports = () => {
     module: {
       rules: [
         {
-          test: /\.css$/i, 
-          use: [MiniCssExtractPlugin.loader, 'css-loader'], 
+          test: /\.css$/i,
+          use: ['style-loader', 'css-loader'],
         },
         {
-          test: /\.(png|svg|jpg|jpeg|gif)$/i, 
-          type: 'asset/resource',
-        },
-        {
-          test: /\.m?js$/, 
-          exclude: /(node_modules|bower_components)/, 
-          use: { 
+          test: /\.m?js$/,
+          exclude: /node_modules/,
+          use: {
             loader: 'babel-loader',
             options: {
               presets: ['@babel/preset-env'],
+              plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/transform-runtime'],
             },
           },
         },
