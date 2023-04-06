@@ -6,7 +6,7 @@ The application is built using an existing codebase and uses the `idb` package, 
 
 ## Links
 * Github Repo: https://github.com/bryxzi/19TextEditor
-* Heroku Deployment: 
+* Heroku Deployment: https://texteditordemo.herokuapp.com
 
 ## Demo
 ![Demo Image](./client/src/images/demo.png)
